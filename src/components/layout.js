@@ -26,7 +26,6 @@ const Layout = ({ children, transitionStatus }) => {
         <div className="cursor"></div>
         <div className="cursor"></div>
           <Header/>
-
           {children}
     </div>
   )
