@@ -1,99 +1,87 @@
 import React from 'react';
-import addToMailchimp from 'gatsby-plugin-mailchimp';
+import { navigate } from 'gatsby-link'
 
-export default class Capture extends React.Component {
 
-    // state = {
-    //     name: null,
-    //     email: null,
-    // }
+function encode(data) {
+    return Object.keys(data)
+      .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+      .join('&')
+  }
 
-    // _handleChange = (e) => {
-    //     console.log({
-    //         [`${e.target.name}`]: e.target.value,
-    //     });
-    //     this.setState({
-    //         [`${e.target.name}`]: e.target.value,
-    //     });
-    // }
+export default function Capture() {
 
-    // _handleSubmit = (e) => {
-    //     e.preventDefault();
+    const [state, setState] = React.useState({})
 
-    //     console.log('submit', this.state);
+    const handleChange = (e) => {
+      setState({ ...state, [e.target.name]: e.target.value })
+    }
 
-    //     addToMailchimp(this.state.email, this.state)
-    //         .then(({ msg, result }) => {
-    //             console.log('msg', `${result}: ${msg}`);
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const form = e.target
+        fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: encode({
+            'form-name': form.getAttribute('name'),
+            ...state,
+          }),
+        })
+          .then(() => navigate(form.getAttribute('action')))
+          .catch((error) => alert(error))
+    }
 
-  
-    //             if (result !== 'success') {
-    //               throw msg;
-    //             }
-    //             alert(msg)
-
-    //             this.nameInput.value = "";
-    //             this.emailInput.value = "";
-                
-    //         })
-    //         .catch((err) => {
-    //             console.log('err', err);
-    //             alert(err);
-    //         });
-    // }
-
-    render() {
-        return (
+ 
+    return (
      
             <header className="o-banner c-hero"> 
 
               <div className="o-content">
 
-                {/* <h3>Hi people</h3>
-                <p>Submit the form below and check your browser console!</p>
-                <form onSubmit={this._handleSubmit}>
-                    <input
-                        ref={(ref) => this.nameInput= ref}
-                        type="text"
-                        onChange={this._handleChange}
-                        placeholder="name"
-                        name="name"
-                    />
-                    <input
-                        ref={(ref) => this.emailInput= ref}
-                        type="email"
-                        onChange={this._handleChange}
-                        placeholder="email"
-                        name="email"
-                    />
-                    
-                    <input type="submit" />
-                </form> */}
-
-
-                <form 
-                    name="push-capture" 
-                    method="POST" 
+                <h1>Contact</h1>
+                
+                <form
+                    name="contact"
+                    method="post"
+                    action="/index/"
                     data-netlify="true"
                     data-netlify-honeypot="bot-field"
-                    >
-                    
-                    <div className="pane">
-                        <label>Your Name: <input type="text" name="name" /></label>   
-                    </div>
-                    <div className="pane">
-                        <label>Your Email: <input type="email" name="email" /></label>
-                    </div>
-                    <div className="pane">
-                        <label>Your Role: <select name="role[]" multiple>
-                        <option value="leader">Leader</option>
-                        <option value="follower">Follower</option>
-                        </select></label>
-                    </div>
-                    <div className="pane">
-                        <label>Message: <textarea name="message"></textarea></label>
-                        <button type="submit">Send</button>
-                    </div>
+                    onSubmit={handleSubmit}
+                >
+
+                    {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
+                    <input type="hidden" name="form-name" value="contact" />
+                    <p hidden>
+                    <label>
+                        Don’t fill this out: <input name="bot-field" onChange={handleChange} />
+                    </label>
+                    </p>
+
+
+                    <p>
+                    <label>
+                        Your name:
+                        <br />
+                        <input type="text" name="name" onChange={handleChange} />
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                        Your email:
+                        <br />
+                        <input type="email" name="email" onChange={handleChange} />
+                    </label>
+                    </p>
+                    <p>
+                    <label>
+                        Message:
+                        <br />
+                        <textarea name="message" onChange={handleChange} />
+                    </label>
+                    </p>
+                    <p>
+                    <button type="submit">Send</button>
+                    </p>
 
                 </form>
 
@@ -102,6 +90,6 @@ export default class Capture extends React.Component {
             </header>
 
 
-        );
-    }
+        
+    )
 }
