@@ -29,7 +29,7 @@
     justify-content: flex-start;
     align-items: flex-end;
     padding:10vh 0; 
-    background-color: blue;
+    background-color: #Fefefe;
     opacity:0;
     transition:opacity 150ms ease-in-out;
     will-change: opacity;
@@ -55,11 +55,10 @@
 
         a{
             display:block;
-            font-family: 'Sofia';
             line-height: 48px;
-            font-weight: 300;
+            font-weight: 400;
             font-size:2em;
-            color:#fff;
+            color:blue;
             margin:0 3em;
             text-align: right;
 

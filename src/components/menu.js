@@ -1,8 +1,12 @@
-import { Link } from "gatsby"
-import React from "react"
+
+import React,{Link} from "react"
+
+
 import "../styles/styles.scss"
 import "./menu.scss"
-import logo from "../images/SVG/logo.svg"
+
+import AniLink from "gatsby-plugin-transition-link/AniLink"
+
 
 class Menu extends React.Component {
  
@@ -32,30 +36,14 @@ class Menu extends React.Component {
 
         <nav className={`c-menu_nav ${menuActive}`}>
           
-          {/* <header className="c-header">
-            <div className="c-header_content">
-                <Link to="/">    
-                  <h1 className="c-header_logo">
-                  <img className="logo" src={logo} />
-                  Push
-                  </h1>
-                </Link>
-            </div>
-          </header> */}
-
             <div className="c-menu_nav-list">
-              <Link to="/">Home</Link>
-              <Link to="/about/">About</Link>
-              <Link to="/case-studies/">Case studies</Link>
-              <Link to="/services/">Services</Link>
-              <Link to="/websites/">Websites</Link>
-              <Link to="/social/">Social</Link>
-              {/* <Link to="/marketing/">Digital marketing assets</Link> */}
-              <Link to="/lead-generation/">SEO &amp; lead generation</Link>
-              
-              <Link to="/contact/">Contact</Link>
-
-              <Link to="/email-capture/">Cap</Link>
+              <Link to="/"  >Home</Link>
+              <Link to="/about" >About</Link>
+              <Link to="/case-studies" >Case studies</Link>
+              <Link to="/services"  >Services</Link>
+              <Link to="/websites"  >Websites</Link>
+              <Link to="/contact"  >Contact</Link>
+              <Link to="/email-capture" >Cap</Link>
             </div>
        
         </nav>

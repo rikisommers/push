@@ -1,0 +1,79 @@
+import React from "react"
+import BodyClassName from "react-body-classname"
+
+import TransitionLink from "gatsby-plugin-transition-link"
+import "./case-studies.scss"
+import { useEffect, useState } from "react"
+
+import { Link} from 'gatsby'
+import Img from 'gatsby-image'
+
+import { Layout } from '../../components/layout'
+
+
+const CaseStudiesPage = () => (
+  <BodyClassName className="case-studies">
+  <Layout>
+  
+    <header className="o-banner o-banner--sm">
+      <div className="o-content">
+       <h1>Hi from the case studies page</h1>
+      </div>
+    </header>
+
+
+      {/* <section className="o-grid2 o-grid2--panels">
+      
+          <article className="o-tile">
+            <Link to="/case-study">
+              <div className="c-card shadow">
+                <figure className="c-card__img">
+                  <img src={CanyonImg} 
+                          className="parallax"
+                  alt="A dog smiling in a party hat" />
+          
+                </figure>
+                <h3 className="c-card__header">Design</h3>
+                <div className="c-card__content">werwer</div>
+              </div>
+            </Link>
+          </article>
+
+          <article className="o-tile">
+          <Link to="/case-study">
+              <div className="c-card shadow">
+                <figure className="c-card__img"></figure>
+                <h3 className="c-card__header">Development</h3>
+                <div className="c-card__content">werwer</div>
+              </div>
+            </Link>
+          </article>
+
+          <article className="o-tile">
+          <Link to="/case-study">
+              <div className="c-card shadow">
+                <figure className="c-card__img"></figure>
+                <h3 className="c-card__header">Social</h3>
+                <div className="c-card__content">werwer</div>
+              </div>
+            </Link>
+          </article>
+
+          <article className="o-tile">
+          <Link to="/case-study">
+              <div className="c-card shadow">
+                <figure className="c-card__img"></figure>
+                <h3 className="c-card__header">Support</h3>
+                <div className="c-card__content">werwer</div>
+              </div>
+            </Link>
+          </article>
+
+      </section> */}
+
+
+  </Layout>
+  </BodyClassName>
+)
+
+export default CaseStudiesPage

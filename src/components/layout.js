@@ -6,58 +6,31 @@
  */
 
 import React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-
-import Header from "./header"
-//import Link from "gatsby"
-import ShadowHeader from "./shadow-header"
-import Menu from "./menu"
+import { Component } from 'react';
+import ReactDOM from 'react-dom';
 
 import "./layout.scss"
+import "../styles/type.scss"
 import "../styles/styles.scss"
-//import "../scripts/data-scroll.js"
+// import "../scripts/cursor.js"
+import Header from "../components/header"
 
 
 
-const Layout = ({ children }) => {
-  
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
 
-  // const props = useSpring({opacity: 1, from: {opacity: 0}})
-  // <animated.div style={props}>I will fade in</animated.div>
- 
+const Layout = ({ children, transitionStatus }) => {
+
   
   return (
-    <div className="o-container page-content">
-         
- 
-      <Menu/>
-      <ShadowHeader siteTitle={data.site.siteMetadata.title}/>
-      <Header siteTitle={data.site.siteMetadata.title} />
+     <div class="o-container">
+        <div className="cursor"></div>
+        <div className="cursor"></div>
+          <Header/>
 
-      <main>{children}</main>
-
-      {/* <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.org">Gatsby</a>
-      </footer> */}
-
+          {children}
     </div>
   )
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
 
 export default Layout

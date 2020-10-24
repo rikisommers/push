@@ -9,21 +9,21 @@ const Header = ({ siteTitle }) => (
   <header className="c-header">
     <div className="c-header_content">
       
-          <Link to="/">
-            {/* {siteTitle} */}
+          
+       
             
             <h1 className="c-header_logo">
             {/* <img className="logo" src={logo} alt={siteTitle} /> */}
             P.
             </h1>
             
-          </Link>
-          <ul>   
+         
+          {/* <ul>   
             <li><Link to="/about/">About</Link></li>
             <li><Link to="/services/">Services</Link></li>
             <li><Link to="/case-studies/">Case studies</Link></li>
             <li><Link to="/contact/">Contact</Link></li>
-          </ul>
+          </ul> */}
   
 
     </div>

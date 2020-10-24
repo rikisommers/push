@@ -8,11 +8,10 @@ import "./header.scss"
 const ShadowHeader = ({ siteTitle }) => (
   
           <Link to="/" className="c-header_logo shadow">
-            {/* {siteTitle} */}
-            
-{/*         
-            <img className="logo" src={logo} alt={siteTitle} />
-             */}
+            <h1 className="c-header_logo">
+            {/* <img className="logo" src={logo} alt={siteTitle} /> */}
+            P.
+            </h1>
           </Link>
          
 )
