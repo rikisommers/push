@@ -72,7 +72,7 @@ export default class Capture extends React.Component {
 
 
                 <form 
-                    name="contact" 
+                    name="push-capture" 
                     method="POST" 
                     data-netlify="true"
                     data-netlify-honeypot="bot-field"
@@ -94,7 +94,7 @@ export default class Capture extends React.Component {
                         <label>Message: <textarea name="message"></textarea></label>
                         <button type="submit">Send</button>
                     </div>
-                    
+
                 </form>
 
             </div>
