@@ -34,20 +34,19 @@ export default function Capture() {
  
     return (
      
-            <header className="o-banner c-hero"> 
 
-              <div className="o-content">
-
-                <h1>Contact</h1>
-                
-                <form
+          <form
                     name="contact"
                     method="post"
-                    action="/index/"
+                    action="/"
                     data-netlify="true"
                     data-netlify-honeypot="bot-field"
                     onSubmit={handleSubmit}
                 >
+
+       
+
+            
 
                     {/* The `form-name` hidden field is required to support form submissions without JavaScript */}
                     <input type="hidden" name="form-name" value="contact" />
@@ -58,36 +57,38 @@ export default function Capture() {
                     </p>
 
 
+                    <div class="input-field 1">
+                        <input type="text" name="name" placeholder="your name *" onChange={handleChange} />
+                    </div>
+
+                    <div class="input-field">
+                        <input type="email" name="email" placeholder="your email *" onChange={handleChange} />
+                    </div>
+
+                    <div class="input-field">
+                        <input type="text" name="company" placeholder="business / product name" onChange={handleChange} />
+                    </div>
+
+                    <div class="input-field">
+                        <input type="text" name="website" placeholder="website url" onChange={handleChange} />
+                    </div>
+
+
+                    <div class="input-field">
+                        <textarea name="message" placeholder="What can we help you with? *" onChange={handleChange} />
+                    </div>
+
                     <p>
-                    <label>
-                        Your name:
-                        <br />
-                        <input type="text" name="name" onChange={handleChange} />
-                    </label>
+                    <button className="c-button" type="submit">Send</button>
                     </p>
-                    <p>
-                    <label>
-                        Your email:
-                        <br />
-                        <input type="email" name="email" onChange={handleChange} />
-                    </label>
-                    </p>
-                    <p>
-                    <label>
-                        Message:
-                        <br />
-                        <textarea name="message" onChange={handleChange} />
-                    </label>
-                    </p>
-                    <p>
-                    <button type="submit">Send</button>
-                    </p>
+                
 
                 </form>
 
-            </div>
 
-            </header>
+
+
+
 
 
         

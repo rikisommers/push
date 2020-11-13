@@ -1,12 +1,7 @@
-
 import React,{Link} from "react"
-
-
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 import "../styles/styles.scss"
 import "./menu.scss"
-
-import AniLink from "gatsby-plugin-transition-link/AniLink"
-
 
 class Menu extends React.Component {
  
@@ -20,35 +15,24 @@ class Menu extends React.Component {
  
   render() {
 
-    const menuActive = this.state.showMenu ? 'is-active' : '';
+    //const menuActive = this.state.showMenu ? 'is-active' : '';
     //const burgerActive = this.state.showMenu ? 'is-active' : '';
   
     return (   
-    <>
+    <div>
         
-        <div className="c-menu_trigger" onClick={this.toggleMenu}>
-            <div id="hamburger" className={menuActive}>
-            <span className="line"></span>
-            <span className="line"></span>
-            <span className="line"></span>
-            </div>
-        </div>
-
-        <nav className={`c-menu_nav ${menuActive}`}>
+        <nav className="c-menu_nav">
           
             <div className="c-menu_nav-list">
-              <Link to="/"  >Home</Link>
-              <Link to="/about" >About</Link>
-              <Link to="/case-studies" >Case studies</Link>
-              <Link to="/services"  >Services</Link>
-              <Link to="/websites"  >Websites</Link>
-              <Link to="/contact"  >Contact</Link>
-              <Link to="/email-capture" >Cap</Link>
-            </div>
-       
+              <AniLink paintDrip duration={0.3} to="/">Home</AniLink>
+              <AniLink paintDrip duration={0.3} to="/about">About</AniLink>
+              <AniLink swipe direction="up" duration={0.2} to="/contact">Contact</AniLink>
+            </div>  
+
+            <button onClick="toggleMenu">sd</button>
         </nav>
         
-    </>
+    </div>
     )
   }
 }

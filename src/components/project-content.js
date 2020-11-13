@@ -12,29 +12,42 @@ const Grid = styled(Box)`
 
 const ProjectContent = ({ project }) => {
   return (
-    <Box my={4}>
+    <section>
+    
      
+
+          
           {project.images.map(({ fluid }) => {
 
             const withFixedAspectRatio = {
               ...fluid,
-              aspectRatio: 8 / 5
+              aspectRatio: 5 / 8
             };
 
             return (
-              <AspectRatioBox ratio={8 / 5}>
-                  <div className="fill">
-                  <Img 
-                  alt={project.title} 
-                  key={fluid.src} 
-                  fluid={withFixedAspectRatio} 
-                  />
-                  </div>
-              </AspectRatioBox>
+              <div className="c-block">
+                <div className="img">
+                <AspectRatioBox ratio={5 / 8}>
+                    <Img 
+                    alt={project.title} 
+                    key={fluid.src} 
+                    fluid={withFixedAspectRatio} 
+                    />
+                </AspectRatioBox>
+                </div>
+              </div>
             );
           })}
- 
-    </Box>
+      
+      <div className="o-content">
+        <div className="o-content__text">
+          <p className="tags">
+          {project.img.title}
+          </p>
+        </div>
+      </div>
+          
+    </section>
   );
 };
 

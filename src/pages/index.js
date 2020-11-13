@@ -1,27 +1,39 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
+import React, {useEffect, useRef} from 'react'
+
+import { withPrefix, graphql } from "gatsby"
+import BodyClassName from "react-body-classname"
 
 //import HeroTemp from "../components/hero-temp"
 
 import Img from "gatsby-image";
+import Footer from "../components/footer"
 import { Box } from "rebass";
 import styled from "styled-components";
 import AniLink from "gatsby-plugin-transition-link/AniLink";
 
-import Hero from "../components/hero"
-import Capture from "../components/capture"
-import Helmet from 'react-helmet'
-import CanyonImg from "../img/canyon.jpg"
-
 import Layout from "../components/layout"
 import AspectRatioBox from "../components/aspect-ratio-box";
+import SEO from "../components/seo"
+import gsap from "gsap"
 
+import MagneticButton from "../components/magnetic-button"
+
+// initialize custom cursor
 
 const Grid = styled(Box)`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap:20px;
 `;
+
+const settings = {
+	threshold: 40,
+	ratio: 5,
+	max: 100,
+	scale: 1.2,
+	ease: 0.14,
+	label: 'Hover me.'
+}
 
 
 const ProjectGridItem = ({ project }) => {
@@ -40,7 +52,10 @@ const ProjectGridItem = ({ project }) => {
 };
 
 
-const ProjectItem = ({ project }) => {
+const ProjectItem = ({ project, img }) => {
+
+ 
+
   return (
     <AniLink
           fade
@@ -48,30 +63,52 @@ const ProjectItem = ({ project }) => {
           to={`/projects/${project.slug}`}
           duration={1}>
 
-            <section className="project">
+            <section className="c-block" id={project.title}>
 
-              <div className="project__content">
-                <h3>
-                {project.title}
-                </h3>
-                <p>
-                {project.description}
-                </p>
-              </div>
+                <div class="project">
 
-              <figure className="project__img">
-       
-                  <AspectRatioBox ratio={8 / 5}>
-                    <Img 
-                      alt={project.title} 
-                      key={project.img.src} 
-                      fluid={project.img.fluid.src}
-                      className="fill" />
-                  </AspectRatioBox>
+                    <div className="project__text">
+
+                        <h3 className="sub-text"
+                            data-scroll 
+                            data-scroll-speed="1">
+                            {project.title}
+                        </h3>
+                        <p className="text"
+                          data-scroll 
+                          data-scroll-speed="2">
+                            {project.description}
+                        </p>
+
+                        <p className="tags"
+                          data-scroll 
+                          data-scroll-speed="2">
+                          tagname tagname tagname
+                        </p>
+                        
+                    </div>
+
+                    <figure className="project__img" 
       
-              </figure>
+                   >
+                        <div class="inner"
 
-          </section>
+                             >
+                          <AspectRatioBox ratio={5 / 8}>
+                            <div className="fill">
+                              <img
+  
+                                alt={project.title} 
+                                key={project.img.src} 
+                                src={project.img.url}
+                                />
+                              </div>
+                          </AspectRatioBox>
+                        </div>
+                    </figure>
+
+                </div>
+            </section>
 
     </AniLink>
   );
@@ -81,42 +118,92 @@ const ProjectItem = ({ project }) => {
 const IndexPage = ({ data }) => {
   const projects = data.projects.edges;
   return (
+    <BodyClassName className="about">
     <Layout>
 
-      <header className="o-banner c-hero"> 
+        <SEO title="about" />
 
-        <div class="o-content services">
+        <header className="c-hero--home"
+        > 
 
-          <div class="intro">
-            <h4 id="sub-title">{data.datoCmsAbout.title }</h4>
-            { data.datoCmsAbout.description }
+            <div className="c-hero__content">
+               
+                <div className="o-content">
+                    <div className="o-content__text">
+                    <h1 className="sub-text"
+                        data-scroll 
+                        data-scroll-speed="1"
+                        is-inview="anim-text"
+                    >
+                        {data.datoCmsHome.title }
+                    </h1>
+                    {/* <MagneticButton {...settings}/> */}
+                    <h2 className="text"
+                        data-scroll 
+                        data-scroll-speed="2"
+                        is-inview="anim-text"
+                        dangerouslySetInnerHTML={{ __html: data.datoCmsHome.description }}
+                    >
+                    </h2>
+                    </div>
+                    <div class="services">
+                    {data.datoCmsHome.services.map(service => (
+                    <div>
+                    <h3 className="sub-text">{service.title}</h3>
+             
+                    </div>
+                    // <ProjectItem key={project.node.title} project={project.node} img={project.node.img.url} />
+                    ))} 
+                    </div>
+
+                </div>
+
+ 
+            </div>
+
+        </header>
+
+        {/* <div class="home-hero">
+          <div class="home-hero__bg">
+              {data.datoCmsHome.services.map(service => (
+                <div>
+                  <img src={service.image.url}/>
+                </div>
+                // <ProjectItem key={project.node.title} project={project.node} img={project.node.img.url} />
+              ))} 
           </div>
+        </div> */}
 
-          <div class="g-3">
-            <div> 
-              { data.datoCmsAbout.services }
-            </div>
-            <div>
-              { data.datoCmsAbout.socialservices }
-            </div>
-            <div>
-              { data.datoCmsAbout.miscservices }
+        <section className="c-block--text"
+        >
+          <div className="o-content">
+            <div class="o-content__text">
+              <h3 className="sub-text"
+                  data-scroll 
+                  data-scroll-speed="1"
+                  dangerouslySetInnerHTML={{ __html: data.datoCmsHome.about }}
+                  is-inview="anim-text"
+              >
+              </h3>
             </div>
           </div>
+        </section>
 
+        <div id="projects-container">
+          {projects.map(project => (
+            <ProjectItem key={project.node.title} project={project.node} img={project.node.img.url} />
+          ))} 
         </div>
 
-      </header>
-  
-
-      {projects.map(project => (
-        <ProjectItem key={project.node.title} project={project.node} />
-      ))}
-
-      <Capture/>
-
-
+        {/* <script  src={withPrefix('demo.js')}  type="text/javascript" ></script>
+        <script src={withPrefix('three.min.js')}  type="text/javascript" ></script>
+        <script src={withPrefix('perlin.js')}  type="text/javascript" ></script>
+        <script src={withPrefix('TweenMax.min.js')}  type="text/javascript" ></script>
+        <script src={withPrefix('demo4.js')}  type="text/javascript" ></script>
+        */}
+            <Footer/>
     </Layout>
+    </BodyClassName>
   );
 };
 
@@ -124,30 +211,35 @@ const IndexPage = ({ data }) => {
 export default IndexPage
 
 export const query = graphql`
-  query AboutQuery {
+  query HomeQuery {
     datoCmsSite {
       name
-    }
-    datoCmsAbout {
-      title
-      description
     }
     datoCmsHome {
       title
       description
+      about
+      services {
+        title
+        image {
+          alt
+          url
+        }
+      }
     }
     projects: allDatoCmsProject {
     edges {
       node {
         title
         description
-        slug
-          img {
+        img {
             url
             fluid(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
               src
             }
-          }
+        }
+        slug
+
       }
     }
   }

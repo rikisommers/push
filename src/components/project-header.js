@@ -29,7 +29,7 @@ const HeroWrap = styled(Box)`
   ${props =>
     props.truncated &&
     css`
-      max-height: 200px;
+      max-height: 33vh;
       overflow: hidden;
     `}
 `;
@@ -37,36 +37,53 @@ const HeroWrap = styled(Box)`
 
 const Hero = ({ img, truncated }) => {
   return (
-    <HeroWrap mt={[4, 5]} truncated={truncated}>
-      <AspectRatioBox ratio={8 / 5}>
-        <div className="fill">
-        <Img
-            fluid={img}
-          />
+    <HeroWrap truncated={truncated}>
+    <div className="c-block--full">
+        <div className="img">
+          
+     
+            <img
+                src={img.url}
+              />
+  
         </div>
-      </AspectRatioBox>
+    </div>
     </HeroWrap>
     );
 };
   
 
 const ProjectHeader = ({ project, truncated }) => (
-    <header>
-    <Flex flexWrap="wrap">
-      <Box width={[1, 1 / 2]}>
-        <Title as="h1">{project.title}</Title>
-        {/* <Box mt={3}>
-          <Category as="h3">{project.category.title}</Category>
-        </Box> */}
-      </Box>
-      <Box width={[1, 1 / 2]}>
-        <Box mt={[3, 0]}>
-          <Description as="h2">{project.description}</Description>
-        </Box>
-      </Box>
-    </Flex>
-    <Hero img={project.img} truncated={truncated} />
-  </header>
+
+       <header className="c-hero--project"
+        > 
+        
+            <div className="c-hero__content">
+                <div className="o-content">
+                    <div className="o-content__text">
+                    <h1 className="sub-text"
+                        data-scroll 
+                        data-scroll-speed="1"
+                        is-inview="anim-text"
+                    >
+                        {project.title}
+                    </h1>
+                    <h2 className="text"
+                        data-scroll 
+                        data-scroll-speed="2"
+                        is-inview="anim-text"
+                        dangerouslySetInnerHTML={{ __html: project.description }}
+                    >
+                    </h2>
+                    </div>
+                </div>
+            </div>
+            <Hero img={project.img} truncated={truncated} />
+        </header>
+    
+
+
+
   );
 
   export default ProjectHeader;

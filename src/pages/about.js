@@ -1,70 +1,126 @@
-import React from "react"
+import React,{ Component,useEffect, useRef } from "react"
 import BodyClassName from "react-body-classname"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import {  withPrefix, graphql } from "gatsby"
 
-const AboutPage = () => (
-  <BodyClassName className="about">
-  <Layout>
-    <SEO title="Page two" />
+import { TweenMax, TimelineLite} from "gsap";
+import Capture from "../components/capture"
+class AboutPage extends Component  {
+  // ... constructor and toggleMenu from above
 
-    <header className="o-banner o-banner--sm">
-      <div className="o-content">
-       <h1>Hi from the about page</h1>
+  constructor(props){
+    super(props);
+  }
+  
 
-       <p>Over 15 years experience in the digital world.</p>
+  componentDidMount(){
+    TweenMax.staggerFrom('.s1e1', 1, {y: 40, opacity: 0 , delay:0.3}, 1.3);
+    TweenMax.staggerFrom('.s1e2', 1, {y: 40, opacity: 0 , delay:0.6}, 1.3);
+    TweenMax.staggerFrom('.s2e1', 1, {y: 40, opacity: 0, delay:0.9}, 1.3);
+    TweenMax.staggerFrom('.s2e2', 1, {y: 40, opacity: 0, delay:0.9}, 1.3);
+    TweenMax.staggerFrom('.s2e2', 1, {y: 40, opacity: 0, delay:0.6}, 1.3);
+  }
+
+  
+
+  render() {
+    const { data } = this.props;
+    if ( this.props ) {
+    return (
+      <BodyClassName className="about">
+      <Layout>
+      <SEO title="about" />
+        <header className="c-hero--home">
+          <div className="c-hero__content">
+            <div className="o-content">
+            <div className="o-content__text">
+          
+
+              <h1 className="text">
+                {data.datoCmsAbout.title}
+              </h1>
+              
+              <div className="sub-text s1e2" 
+                   ref={div => this.myElement = div}
+                   dangerouslySetInnerHTML={{ __html: data.datoCmsAbout.description }} 
+              />
 
 
-      </div>
-    </header>
-    <section className="o-content">
-      <h2>Our Approach</h2>
+            </div>
+            </div>
+          </div>
+        </header>
+    
 
-      <p>Simplicity is key. Only pay for what you need. Your product your rules.</p>
-      <p>We aim to develop solutions specific to clients requirements, with minimal set up and minimal overhead.
-        If you have a project in mind we can walk you through the options available and make a plan of attack that fits your budget and goals.
-      </p>
-    </section>
-    <section className="o-content o-grid2">
-    <h2>Services</h2>
+        <main>
 
-    <div className="services-list">
+      
+          <section className="o-content">
 
-        <div>
-          <h3>Design</h3>
-          <ul className="c-list">
-            <li>UX consulting</li>
-            <li>UI/UX design</li>
-            <li>Mobile &amp; web design</li>
-            <li>Design systems</li>
-          </ul>
-        </div>
+            
+            <h3 className="sub-text">{data.datoCmsAbout.servicesTitle }</h3>
+            <div className="g-3 services">
+              <div className="tags s2e1" dangerouslySetInnerHTML={{ __html: data.datoCmsAbout.webservices }} />
+              <div className="tags s2e2" dangerouslySetInnerHTML={{ __html: data.datoCmsAbout.socialservices }} />
+              <div className="tags s2e3" dangerouslySetInnerHTML={{ __html: data.datoCmsAbout.miscservices }} />
+            </div>
 
-        <div>
-          <h3>Development</h3>
-          <ul className="c-list">
-            <li>Website development</li>
-            <li>Application development</li>
-            <li>E-commerce</li>
+   
+          </section>
 
-          </ul>
-        </div>
+        </main>
 
-        <div>
-          <h3>Support</h3>
-          <ul className="c-list">
-            <li>Code maintenence</li>
-            <li>Social media</li>
-            <li>SEO</li>
-          </ul>
-        </div>
+      </Layout>
+      </BodyClassName>
+    )
+    }
+  }
+}
 
-    </div>
+// const AboutPage = ({ data }) => (
+//   <BodyClassName className="about">
+//   <Layout>
+//   <SEO title="about" />
+//     <header className="o-banner c-hero">
+//       <div class="o-content">
 
-    </section>
+//         <div class="intro">
+//           <h1>{this.props.datoCmsAbout.title}</h1>
+//           <div dangerouslySetInnerHTML={{ __html: this.props.datoCmsAbout.description }} />
+//         </div>
 
-  </Layout>
-  </BodyClassName>
-)
+//        <section>
+
+//             <h3>{data.datoCmsAbout.servicesTitle }</h3>
+//             <div className="g-3 services">
+//               <div dangerouslySetInnerHTML={{ __html: this.props.datoCmsAbout.webservices }} />
+//               <div dangerouslySetInnerHTML={{ __html: this.props.datoCmsAbout.socialservices }} />
+//               <div dangerouslySetInnerHTML={{ __html: dthis.props.datoCmsAbout.miscservices }} />
+//             </div>
+
+//         </section>
+
+//       </div>
+//     </header>
+
+//   </Layout>
+//   </BodyClassName>
+// )
 
 export default AboutPage
+
+
+
+export const query = graphql`
+  query AboutQuery {
+    datoCmsAbout {
+      title
+      description
+      servicesTitle
+      webservices
+      socialservices
+      miscservices
+    }
+  }
+`

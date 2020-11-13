@@ -9,6 +9,8 @@ import ProjectContent from "../components/project-content";
 import NextProjectHeading from "../components/next-project-heading";
 import {TweenLite, CSSPlugin, ScrollToPlugin} from "gsap/all";
 import { HelmetDatoCms } from 'gatsby-source-datocms'
+import BodyClassName from "react-body-classname"
+import SEO from "../components/seo"
 
 const TRANSITION_LENGTH = 1.5;
 
@@ -58,29 +60,33 @@ const ProjectInner = ({ transitionStatus, project }) => {
 
 
   return (
-    <Layout transitionStatus={transitionStatus}>
-      
-      <HelmetDatoCms seo={project.seoMetaTags} />
+    <BodyClassName className="cae-study">
+            {/* <HelmetDatoCms seo={project.seoMetaTags} /> */}
 
-      <FadingContent pose={transitionStatus}>
-        <ProjectHeader project={project} />
-        <ProjectContent project={project} />
-      </FadingContent>
+ {/* <SEO title={project.title} /> */}
+        <Layout >
+       
+  
+       
+          <ProjectHeader project={project} />
+          <ProjectContent project={project} />
+        
+        <TransitionLink
+          to={nextProjectUrl}
+          // exit={exitTransition}
+          // entry={entryTransition}
+        >
+          
+            <NextProjectHeading />
+         
+         
+            <ProjectHeader project={project.next} />
+        
+        </TransitionLink>
 
-      <TransitionLink
-        to={nextProjectUrl}
-        exit={exitTransition}
-        entry={entryTransition}
-      >
-        <FadingNextProjectHeading pose={transitionStatus}>
-          <NextProjectHeading />
-        </FadingNextProjectHeading>
-        <SlidingHeader pose={transitionStatus}>
-          <ProjectHeader project={project.next} truncated={shouldTruncate} />
-        </SlidingHeader>
-      </TransitionLink>
+      </Layout>
 
-    </Layout>
+    </BodyClassName>
   );
 };
 
@@ -113,6 +119,13 @@ export const query = graphql`
       }
       title
       description
+      img{
+        url
+        fluid{
+          ...GatsbyDatoCmsFluid
+        }
+
+      }
       images {
         fluid(maxWidth: 600, imgixParams: { fm: "jpg", auto: "compress" }) {
           src
@@ -124,6 +137,7 @@ export const query = graphql`
       slug
       description
       img {
+        url
         fluid {
           ...GatsbyDatoCmsFluid
         }
