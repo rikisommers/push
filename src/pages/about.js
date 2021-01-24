@@ -14,13 +14,13 @@ class AboutPage extends Component  {
   }
   
 
-  componentDidMount(){
-    TweenMax.staggerFrom('.s1e1', 1, {y: 40, opacity: 0 , delay:0.3}, 1.3);
-    TweenMax.staggerFrom('.s1e2', 1, {y: 40, opacity: 0 , delay:0.6}, 1.3);
-    TweenMax.staggerFrom('.s2e1', 1, {y: 40, opacity: 0, delay:0.9}, 1.3);
-    TweenMax.staggerFrom('.s2e2', 1, {y: 40, opacity: 0, delay:0.9}, 1.3);
-    TweenMax.staggerFrom('.s2e2', 1, {y: 40, opacity: 0, delay:0.6}, 1.3);
-  }
+  // componentDidMount(){
+  //   TweenMax.staggerFrom('.s1e1', 1, {y: 40, opacity: 0 , delay:0.3}, 1.3);
+  //   TweenMax.staggerFrom('.s1e2', 1, {y: 40, opacity: 0 , delay:0.6}, 1.3);
+  //   TweenMax.staggerFrom('.s2e1', 1, {y: 40, opacity: 0, delay:0.9}, 1.3);
+  //   TweenMax.staggerFrom('.s2e2', 1, {y: 40, opacity: 0, delay:0.9}, 1.3);
+  //   TweenMax.staggerFrom('.s2e2', 1, {y: 40, opacity: 0, delay:0.6}, 1.3);
+  // }
 
   
 
@@ -31,44 +31,39 @@ class AboutPage extends Component  {
       <BodyClassName className="about">
       <Layout>
       <SEO title="about" />
-        <header className="c-hero--home">
+        <header className="c-hero--sub">
           <div className="c-hero__content">
             <div className="o-content">
-            <div className="o-content__text">
-          
+              <div className="o-content__text">
+            
+                <h1 className="text">
+                  {data.datoCmsAbout.title}
+                </h1>
+                
+                <div className="sub-text s1e2" 
+                    ref={div => this.myElement = div}
+                    dangerouslySetInnerHTML={{ __html: data.datoCmsAbout.description }} 
+                />
 
-              <h1 className="text">
-                {data.datoCmsAbout.title}
-              </h1>
-              
-              <div className="sub-text s1e2" 
-                   ref={div => this.myElement = div}
-                   dangerouslySetInnerHTML={{ __html: data.datoCmsAbout.description }} 
-              />
 
-
+              </div>
             </div>
-            </div>
+            
           </div>
         </header>
     
 
-        <main>
+        <main className="c-content-section">
+            <section className="o-content">
+              
+              <h3 className="text">{data.datoCmsAbout.servicesTitle }</h3>
+              <div className="g-3 services">
+                <div className="tags s2e1" dangerouslySetInnerHTML={{ __html: data.datoCmsAbout.webservices }} />
+                <div className="tags s2e2" dangerouslySetInnerHTML={{ __html: data.datoCmsAbout.socialservices }} />
+                <div className="tags s2e3" dangerouslySetInnerHTML={{ __html: data.datoCmsAbout.miscservices }} />
+              </div>
 
-      
-          <section className="o-content">
-
-            
-            <h3 className="sub-text">{data.datoCmsAbout.servicesTitle }</h3>
-            <div className="g-3 services">
-              <div className="tags s2e1" dangerouslySetInnerHTML={{ __html: data.datoCmsAbout.webservices }} />
-              <div className="tags s2e2" dangerouslySetInnerHTML={{ __html: data.datoCmsAbout.socialservices }} />
-              <div className="tags s2e3" dangerouslySetInnerHTML={{ __html: data.datoCmsAbout.miscservices }} />
-            </div>
-
-   
-          </section>
-
+            </section>
         </main>
 
       </Layout>

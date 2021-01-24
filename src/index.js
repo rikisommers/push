@@ -14,12 +14,40 @@ class App extends React.Component {
     
   }
   render() {
+    $(document).mousemove(function(e) {
+      $('.cursor').eq(0).css({
+          left: e.clientX,
+          top: e.clientY
+        });
+      setTimeout(function() {
+        $('.cursor').eq(1).css({
+            left: e.clientX,
+            top: e.clientY
+          });
+      }, 100);
+    });
+
+    function activeCursor () {
+      $('.cursor').eq(1).css({
+          width: '72px',
+          height: '72px'
+        });
+    }
+  
+    function inactiveCursor () {
+      $('.cursor').eq(1).css({
+          width: '22px',
+          height: '22px'
+        });
+    }
+    
+    
     return (
 
     <div className="App">
-          
+          <div className="cursor"></div>
           <div id="view">
-            <h1>safs</h1>
+
           </div>
       
     
@@ -30,3 +58,4 @@ class App extends React.Component {
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
+

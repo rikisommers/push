@@ -4,6 +4,7 @@ import { withPrefix, graphql } from "gatsby"
 import BodyClassName from "react-body-classname"
 
 //import HeroTemp from "../components/hero-temp"
+import posed, { PoseGroup } from 'react-pose';
 
 import Img from "gatsby-image";
 import Footer from "../components/footer"
@@ -18,7 +19,53 @@ import gsap from "gsap"
 
 import MagneticButton from "../components/magnetic-button"
 
+import { window, document, body, exists } from "browser-monads";
+
 // initialize custom cursor
+
+// var $body = $('body'),
+// 	$panel = $('.panel'),
+// 	$pContent = $('.panel__content'),
+// 	$img = $('.panel__img-col');
+
+// function initTilt() {
+// 	TweenMax.set([$pContent, $img], { transformStyle: "preserve-3d" });
+
+// 	$body.mousemove(function(e) {
+// 		tilt(e.pageX, e.pageY) 
+// 	});
+// };
+
+// function tilt(cx, cy) {
+// 	// var sxPos = cx / $panel.width() * 100 - 100;
+// 	// var syPos = cy / $panel.height() * 100 - 100;
+// 	var sxPos = (cx / $body.width()*100 - 50)*2 ;
+// 	var syPos = (cy / $body.height()*100 - 50)*2;
+// 	TweenMax.to($pContent, 2, {
+// 		rotationY: -0.03 * sxPos,
+// 		rotationX: 0.03 * syPos,
+// 		transformPerspective: 500,
+// 		transformOrigin: "center center -400",
+// 		ease: Expo.easeOut
+// 	});
+// 	TweenMax.to($img, 2, {
+// 		rotationY: -0.03 * sxPos,
+// 		rotationX: 0.03 * syPos,
+// 		transformPerspective: 500,
+// 		transformOrigin: "center center -200",
+// 		ease: Expo.easeOut
+// 	});
+// }
+
+// $body.mouseleave(function() {
+// 	tilt($body.width()/2, $body.height()/2);
+// })
+
+// initTilt();
+
+// console.clear();
+
+
 
 const Grid = styled(Box)`
   display: grid;
@@ -36,7 +83,51 @@ const settings = {
 }
 
 
+const Title = posed.div({
+  enter: { y: 0, opacity: 1, delay: 3000 },
+  exit: { y: 50, opacity: 0 }
+});
+const Intro = posed.div({
+  enter: { y: 0, opacity: 1, delay: 3000 },
+  exit: { y: 50, opacity: 0 }
+});
+const Bg = posed.div({
+  enter: { y: 0, opacity: 1, delay: 3000 },
+  exit: {
+    y: 50,
+    opacity: 0,
+    transition: { duration: 200 }
+  }
+});
+
+
+// function checkVisible( elm, eval ) {
+//   eval = eval || "object visible";
+//   var viewportHeight = $(window).height(), // Viewport Height
+//       scrolltop = $(window).scrollTop(), // Scroll Top
+//       y = $(elm).offset().top,
+//       elementHeight = $(elm).height();   
+
+//   if (eval == "object visible") return ((y < (viewportHeight + scrolltop)) && (y > (scrolltop - elementHeight)));
+//   if (eval == "above") return ((y < (viewportHeight + scrolltop)));
+// }
+
+
+// Scroll.on('call', func => {
+//   if (checkVisible($('#my-hero'))) {
+//       //do something when myID1 is in view
+//       console.log("test myID1");
+//   } else if (checkVisible($('#projects-container'))) {
+//       //do something when myID2 is in view
+//       console.log("test myID2");
+//   } else {
+//       // do nothing
+//   }
+// });
+
 const ProjectGridItem = ({ project }) => {
+
+ 
   return (
     <AniLink
       style={{ textDecoration: "none" }}
@@ -57,104 +148,152 @@ const ProjectItem = ({ project, img }) => {
  
 
   return (
-    <AniLink
-          fade
-          style={{ textDecoration: "none", color:"black"}}
-          to={`/projects/${project.slug}`}
-          duration={1}>
+ 
 
             <section className="c-block" id={project.title}>
 
                 <div class="project">
 
-                    <div className="project__text">
+                    <div className="project__text" data-scroll data-scroll-speed="1">
 
-                        <h3 className="sub-text"
-                            data-scroll 
-                            data-scroll-speed="1">
+                        <h3 className="sub-text">
                             {project.title}
                         </h3>
                         <p className="text"
-                          data-scroll 
-                          data-scroll-speed="2">
+>
                             {project.description}
                         </p>
 
                         <p className="tags"
-                          data-scroll 
-                          data-scroll-speed="2">
+>
                           tagname tagname tagname
                         </p>
-                        
+
+                        <AniLink
+          paintDrip
+          to={`/projects/${project.slug}`}
+          duration={1}>
+            Link
+            </AniLink>  
                     </div>
 
                     <figure className="project__img" 
-      
+                       data-scroll
+                        data-scroll-speed="0"
                    >
-                        <div class="inner"
+                        <div class="inner">
+              
+                            <div className="fill img"
+                                                  data-scroll
+                                                  data-scroll-speed="-2"
 
-                             >
-                          <AspectRatioBox ratio={5 / 8}>
-                            <div className="fill">
-                              <img
+                            style={{backgroundImage: 'url('+project.img.url+')'}}
+                                  >
+                              {/* <img
   
                                 alt={project.title} 
                                 key={project.img.src} 
                                 src={project.img.url}
-                                />
+                                /> */}
                               </div>
-                          </AspectRatioBox>
+                    
                         </div>
                     </figure>
 
                 </div>
             </section>
 
-    </AniLink>
+ 
   );
 };
 
 
 const IndexPage = ({ data }) => {
+
+  const testEvent  = () => {
+    console.log('fffsfdsf');
+  };
+
+
   const projects = data.projects.edges;
+  //const bg = projects[1].img.url;
   return (
     <BodyClassName className="about">
     <Layout>
 
         <SEO title="about" />
 
-        <header className="c-hero--home"
-        > 
+        <header className="c-hero--home" id="my-hero"
+> 
 
             <div className="c-hero__content">
                
                 <div className="o-content">
-                    <div className="o-content__text">
+                    <div className="o-content__text-home"
+                                      data-scroll 
+                                      data-scroll-speed="1"
+                                      >
+{/* 
+                    <Title key="title" 
+                            className="sub-text"
+                            data-scroll 
+                            data-scroll-speed="1"
+                            is-inview="anim-text"
+                            >
+                    {data.datoCmsHome.title }
+                    </Title>
+
+                    <Intro key="intro" 
+                    className="text"
+                    data-scroll 
+                    data-scroll-speed="1"
+                    is-inview="anim-text"
+                    dangerouslySetInnerHTML={{ __html: data.datoCmsHome.description }}
+                    >
+           
+                    </Intro> */}
+
                     <h1 className="sub-text"
-                        data-scroll 
-                        data-scroll-speed="1"
-                        is-inview="anim-text"
+                     
+                     
                     >
                         {data.datoCmsHome.title }
                     </h1>
-                    {/* <MagneticButton {...settings}/> */}
+
                     <h2 className="text"
-                        data-scroll 
-                        data-scroll-speed="2"
-                        is-inview="anim-text"
+         
+                      
                         dangerouslySetInnerHTML={{ __html: data.datoCmsHome.description }}
                     >
                     </h2>
+
+
+                    {/* <MagneticButton {...settings}/> */}
                     </div>
-                    <div class="services">
+                    
+                    
+
+                    <div class="o-content__text">
+                      <h3 className="sub-text"
+                      data-scroll 
+                      data-scroll-speed="1"
+                          dangerouslySetInnerHTML={{ __html: data.datoCmsHome.about }}
+                          
+                      >
+                      </h3>
+                    </div>
+        
+                    {/* <div class="services">
                     {data.datoCmsHome.services.map(service => (
-                    <div>
-                    <h3 className="sub-text">{service.title}</h3>
+                      <div>
+
+                      <h3 className="sub-text">{service.title}</h3>
              
-                    </div>
+                     </div>
                     // <ProjectItem key={project.node.title} project={project.node} img={project.node.img.url} />
-                    ))} 
-                    </div>
+                    ))}  
+
+                    </div>*/}
 
                 </div>
 
@@ -163,33 +302,62 @@ const IndexPage = ({ data }) => {
 
         </header>
 
-        {/* <div class="home-hero">
-          <div class="home-hero__bg">
-              {data.datoCmsHome.services.map(service => (
-                <div>
-                  <img src={service.image.url}/>
-                </div>
-                // <ProjectItem key={project.node.title} project={project.node} img={project.node.img.url} />
-              ))} 
-          </div>
-        </div> */}
-
-        <section className="c-block--text"
+{/* 
+        <div class="let"
         >
+          <div class="home-vid-mask-wrap blend-multiply pos-ab"> 
+            <div class="img pos-ab" style={{backgroundImage: 'url('+data.datoCmsHome.services[0].image.url+')'}}></div>
+              <div class="blend-screen home-video-mask pos-ab">
+              <div class="let-t">
+                <span class="h1">PUSH</span>
+                <span class="blob"></span>
+              </div>
+              </div>    
+            </div>  
+        </div> */}
+            
+        <section className="c-block--services" id="call"
+        >
+
+          {/* <div class="home-hero__bg">
+  
+          </div> */}
+
           <div className="o-content">
-            <div class="o-content__text">
-              <h3 className="sub-text"
-                  data-scroll 
-                  data-scroll-speed="1"
-                  dangerouslySetInnerHTML={{ __html: data.datoCmsHome.about }}
-                  is-inview="anim-text"
-              >
-              </h3>
+           <div className="o-content__text">
+              <ul class="services-list">
+                {data.datoCmsHome.services.map((service, index) => (
+                  <li id={service.title}>
+                  <h2 
+                  data-scroll
+                  data-scroll-repeat="true"	
+                  data-scroll-offset="55%, 45%"
+                  data-scroll-target={'#'+service.title}
+                  className="masthead">{service.title}
+                  </h2>
+                  </li>
+                ))}
+                </ul>  
             </div>
-          </div>
+            <   div class="img pos-ab" style={{backgroundImage: 'url('+data.datoCmsHome.services[0].image.url+')'}}></div>
+
+{/* {data.datoCmsHome.services.map(service => (
+  <div>
+    <img src={service.image.url}/>
+  </div>
+  // <ProjectItem key={project.node.title} project={project.node} img={project.node.img.url} />
+))}  */}
+           </div>
+
         </section>
 
-        <div id="projects-container">
+
+        <div id="projects-container"
+                            data-scroll
+                            data-scroll-repeat="true"	
+                            data-scroll-position="top"
+                           
+                            data-scroll-call="test">
           {projects.map(project => (
             <ProjectItem key={project.node.title} project={project.node} img={project.node.img.url} />
           ))} 
@@ -201,7 +369,7 @@ const IndexPage = ({ data }) => {
         <script src={withPrefix('TweenMax.min.js')}  type="text/javascript" ></script>
         <script src={withPrefix('demo4.js')}  type="text/javascript" ></script>
         */}
-            <Footer/>
+         
     </Layout>
     </BodyClassName>
   );
@@ -227,6 +395,7 @@ export const query = graphql`
         }
       }
     }
+
     projects: allDatoCmsProject {
     edges {
       node {
