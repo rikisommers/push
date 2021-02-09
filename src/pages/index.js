@@ -341,16 +341,16 @@ const IndexPage = ({ data }) => {
         </section>
 
 
-        <div id="projects-container"
+{/*        <div id="projects-container"
                             data-scroll
-                            data-scroll-repeat="true"	
+                            data-scroll-repeat="true"
                             data-scroll-position="top"
-                           
+
                             data-scroll-call="test">
           {projects.map(project => (
             <ProjectItem key={project.node.title} project={project.node} img={project.node.img.url} />
-          ))} 
-        </div>
+          ))}
+        </div>*/}
 
         {/* <script  src={withPrefix('demo.js')}  type="text/javascript" ></script>
         <script src={withPrefix('three.min.js')}  type="text/javascript" ></script>
