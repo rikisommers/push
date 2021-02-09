@@ -253,16 +253,12 @@ const IndexPage = ({ data }) => {
            
                     </Intro> */}
 
-                    <h1 className="sub-text"
-                     
-                     
-                    >
-                        {data.datoCmsHome.title }
-                    </h1>
+                    {data.datoCmsHome.title != null && <h1 className="sub-text">{data.datoCmsHome.title }</h1>}
+
 
                     <h2 className="text"
-         
-                      
+
+
                         dangerouslySetInnerHTML={{ __html: data.datoCmsHome.description }}
                     >
                     </h2>
@@ -319,34 +315,27 @@ const IndexPage = ({ data }) => {
         <section className="c-block--services" id="call"
         >
 
-          {/* <div class="home-hero__bg">
-  
-          </div> */}
-
           <div className="o-content">
            <div className="o-content__text">
               <ul class="services-list">
                 {data.datoCmsHome.services.map((service, index) => (
                   <li id={service.title}>
-                  <h2 
+                    {service.title != null && <h2
                   data-scroll
-                  data-scroll-repeat="true"	
+                  data-scroll-repeat="true"
                   data-scroll-offset="55%, 45%"
                   data-scroll-target={'#'+service.title}
                   className="masthead">{service.title}
-                  </h2>
+                  </h2>}
                   </li>
                 ))}
-                </ul>  
+                </ul>
             </div>
-            <   div class="img pos-ab" style={{backgroundImage: 'url('+data.datoCmsHome.services[0].image.url+')'}}></div>
+            {data.datoCmsHome.heroImg != null &&
+            <div class="img pos-ab"
+                 style={{ backgroundImage: 'url(' + data.datoCmsHome.heroImg.url + ')' }}></div>
+            }
 
-{/* {data.datoCmsHome.services.map(service => (
-  <div>
-    <img src={service.image.url}/>
-  </div>
-  // <ProjectItem key={project.node.title} project={project.node} img={project.node.img.url} />
-))}  */}
            </div>
 
         </section>
@@ -387,6 +376,10 @@ export const query = graphql`
       title
       description
       about
+      heroImg{
+      alt
+      url
+      }
       services {
         title
         image {
