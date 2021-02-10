@@ -79,6 +79,19 @@ z-index:9999;
             margin:10px;
         }
 
+        a{
+            color:#000;
+            &[aria-current]{
+                color:blue;
+            }
+
+            .home &{
+                color:#fff;
+                &[aria-current]{
+                    color:lighten(blue,60%);
+                }
+            }
+        }
         
     }
 
