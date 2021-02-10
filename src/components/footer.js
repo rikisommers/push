@@ -83,19 +83,19 @@ export default function Footer() {
                 >
 
                     <div className="content1">
-                    <ul className="social">
+                   {/* <ul className="social">
 
                         <li>
                           <a className="text">facebook</a>
-                        </li> 
+                        </li>
                         <li>
                           <a className="text">instagram</a>
-                        </li> 
+                        </li>
 
-                    </ul>
+                    </ul>*/}
                     </div>
 
-                    <p className="copyright content2">© pushdigital 2020</p>
+                    <p className="copyright content2">© pushdigital 2021</p>
               </div>
               
           </div>

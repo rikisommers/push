@@ -165,7 +165,7 @@ img{
     margin-right:30vw;
 
     @media only screen and (mim-width: $tablet-p-max) {
-      max-width:40vw;
+      margin-right:60vw;
       font-size: 1.16667vw;
     }
 
@@ -215,7 +215,7 @@ color:#fff;
 .text{
 display: block;
 margin: 30px 0 0 0;
-font-size: 5.2vw;
+font-size: 32px;
 line-height: 133%;
 letter-spacing: -.03em;
 transition:all 300ms ease;
@@ -225,9 +225,6 @@ color:$text;
   color:$text;
 }
 
-    @media only screen and (min-width: $desktop-min) {
-      font-size: 2.58333vw;
-    }
 
 }
 
@@ -236,7 +233,7 @@ color:$text;
 .masthead{
 display: block;
 margin: 0;
-font-size: 8.58333vw;
+font-size: 30px;
 line-height: 133%;
 letter-spacing: -.03em;
 //color:lightgray;  
@@ -256,7 +253,7 @@ color:$text;
 .sub-text{
 display: block;
 margin: 30px 0 0 0;
-font-size: 3.3vw;
+font-size: 20px;
 font-weight:400;
 line-height: 133%;
 letter-spacing: -.03em;
@@ -268,7 +265,7 @@ color:$text;
   }
 
   @media only screen and (min-width: $desktop-min) {
-    font-size: 1.5vw;
+    font-size: 27px;
   }
 
 }
@@ -330,12 +327,22 @@ background-size: cover;
   }
 
   &--home{
+    background: linear-gradient(
+                    180deg
+            ,#2948ff,#396afc);
 
     .c-hero__content{
-      min-height: auto;
-      height:85vh;
+      min-height: 100vh;
+      height:100vh;
       padding-top:20vh;
+
+      .sub-text,
+      .text{
+        color:#fff;
+      }
+
     }
+
 
   }
   

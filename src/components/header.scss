@@ -42,7 +42,16 @@ z-index:9999;
                     &[aria-current]{
                         color:blue;
                     }
+
+                        .home &{
+                            color:#fff;
+                            &[aria-current]{
+                                color:lighten(blue,60%);
+                            }
+                        }
                 }
+
+
 
             }
     

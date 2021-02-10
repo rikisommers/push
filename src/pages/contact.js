@@ -13,26 +13,22 @@ const ContectPage = ({data}) => (
       
         <header className="c-hero">
             <div className="o-content">
-    
-
                 <div class="cl">
                   <div class="cl__left">
-                      <h1 className="text">{data.datoCmsContact.title}</h1>
-                      <div className="sub-text"
-                          dangerouslySetInnerHTML={{ __html: data.datoCmsContact.description }} />
-
+                    {data.datoCmsContact.title != null &&
+                    <h1 className="text">{data.datoCmsContact.title}</h1>
+                    }
+                    {data.datoCmsContact.description != null &&
+                    <div className="sub-text"
+                         dangerouslySetInnerHTML={{ __html: data.datoCmsContact.description }} />
+                    }
                   </div>
                   <div class="cl__right">
                     <Capture/>
                   </div>
                 </div>
-
-
             </div>
-
         </header>
-
-
 
   </Layout>
   </BodyClassName>

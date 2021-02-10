@@ -100,31 +100,6 @@ const Bg = posed.div({
   }
 });
 
-
-// function checkVisible( elm, eval ) {
-//   eval = eval || "object visible";
-//   var viewportHeight = $(window).height(), // Viewport Height
-//       scrolltop = $(window).scrollTop(), // Scroll Top
-//       y = $(elm).offset().top,
-//       elementHeight = $(elm).height();   
-
-//   if (eval == "object visible") return ((y < (viewportHeight + scrolltop)) && (y > (scrolltop - elementHeight)));
-//   if (eval == "above") return ((y < (viewportHeight + scrolltop)));
-// }
-
-
-// Scroll.on('call', func => {
-//   if (checkVisible($('#my-hero'))) {
-//       //do something when myID1 is in view
-//       console.log("test myID1");
-//   } else if (checkVisible($('#projects-container'))) {
-//       //do something when myID2 is in view
-//       console.log("test myID2");
-//   } else {
-//       // do nothing
-//   }
-// });
-
 const ProjectGridItem = ({ project }) => {
 
  
@@ -145,13 +120,9 @@ const ProjectGridItem = ({ project }) => {
 
 const ProjectItem = ({ project, img }) => {
 
- 
-
   return (
- 
 
             <section className="c-block" id={project.title}>
-
                 <div class="project">
 
                     <div className="project__text" data-scroll data-scroll-speed="1">
@@ -210,24 +181,19 @@ const ProjectItem = ({ project, img }) => {
 
 const IndexPage = ({ data }) => {
 
-  const testEvent  = () => {
-    console.log('fffsfdsf');
-  };
-
-
   const projects = data.projects.edges;
   //const bg = projects[1].img.url;
   return (
-    <BodyClassName className="about">
+    <BodyClassName className="home">
     <Layout>
 
-        <SEO title="about" />
+        <SEO title="Push Digital" />
 
-        <header className="c-hero--home" id="my-hero"
-> 
-
+        <header className="c-hero--home"
+                id="my-hero"
+                // style={{ backgroundImage: 'url(' + data.datoCmsHome.heroImg.url + ')' }}
+        >
             <div className="c-hero__content">
-               
                 <div className="o-content">
                     <div className="o-content__text-home"
                                       data-scroll 
@@ -253,112 +219,27 @@ const IndexPage = ({ data }) => {
            
                     </Intro> */}
 
-                    {data.datoCmsHome.title != null && <h1 className="sub-text">{data.datoCmsHome.title }</h1>}
-
-
-                    <h2 className="text"
-
-
-                        dangerouslySetInnerHTML={{ __html: data.datoCmsHome.description }}
-                    >
-                    </h2>
-
-
-                    {/* <MagneticButton {...settings}/> */}
-                    </div>
-                    
-                    
-
-                    <div class="o-content__text">
-                      <h3 className="sub-text"
-                      data-scroll 
-                      data-scroll-speed="1"
-                          dangerouslySetInnerHTML={{ __html: data.datoCmsHome.about }}
-                          
+                      {data.datoCmsHome.title != null && <h1 className="sub-text">{data.datoCmsHome.title }</h1>}
+                      {data.datoCmsHome.description != null &&
+                      <h2 className="text"
+                          dangerouslySetInnerHTML={{ __html: data.datoCmsHome.description }}
                       >
-                      </h3>
+                      </h2>
+                      }
                     </div>
-        
-                    {/* <div class="services">
-                    {data.datoCmsHome.services.map(service => (
-                      <div>
-
-                      <h3 className="sub-text">{service.title}</h3>
-             
-                     </div>
-                    // <ProjectItem key={project.node.title} project={project.node} img={project.node.img.url} />
-                    ))}  
-
-                    </div>*/}
-
-                </div>
-
- 
-            </div>
-
-        </header>
-
-{/* 
-        <div class="let"
-        >
-          <div class="home-vid-mask-wrap blend-multiply pos-ab"> 
-            <div class="img pos-ab" style={{backgroundImage: 'url('+data.datoCmsHome.services[0].image.url+')'}}></div>
-              <div class="blend-screen home-video-mask pos-ab">
-              <div class="let-t">
-                <span class="h1">PUSH</span>
-                <span class="blob"></span>
-              </div>
-              </div>    
-            </div>  
-        </div> */}
-            
-        <section className="c-block--services" id="call"
-        >
-
-          <div className="o-content">
-           <div className="o-content__text">
-              <ul class="services-list">
-                {data.datoCmsHome.services.map((service, index) => (
-                  <li id={service.title}>
-                    {service.title != null && <h2
-                  data-scroll
-                  data-scroll-repeat="true"
-                  data-scroll-offset="55%, 45%"
-                  data-scroll-target={'#'+service.title}
-                  className="masthead">{service.title}
-                  </h2>}
-                  </li>
-                ))}
-                </ul>
-            </div>
-            {data.datoCmsHome.heroImg != null &&
-            <div class="img pos-ab"
-                 style={{ backgroundImage: 'url(' + data.datoCmsHome.heroImg.url + ')' }}></div>
-            }
-
-           </div>
-
-        </section>
-
-
-{/*        <div id="projects-container"
+                    {data.datoCmsHome.about != null &&
+                      <div class="o-content__text">
+                        <h3 className="sub-text"
                             data-scroll
-                            data-scroll-repeat="true"
-                            data-scroll-position="top"
-
-                            data-scroll-call="test">
-          {projects.map(project => (
-            <ProjectItem key={project.node.title} project={project.node} img={project.node.img.url} />
-          ))}
-        </div>*/}
-
-        {/* <script  src={withPrefix('demo.js')}  type="text/javascript" ></script>
-        <script src={withPrefix('three.min.js')}  type="text/javascript" ></script>
-        <script src={withPrefix('perlin.js')}  type="text/javascript" ></script>
-        <script src={withPrefix('TweenMax.min.js')}  type="text/javascript" ></script>
-        <script src={withPrefix('demo4.js')}  type="text/javascript" ></script>
-        */}
-         
+                            data-scroll-speed="1"
+                            dangerouslySetInnerHTML={{ __html: data.datoCmsHome.about }}
+                        >
+                        </h3>
+                      </div>
+                    }
+                </div>
+            </div>
+        </header>
     </Layout>
     </BodyClassName>
   );

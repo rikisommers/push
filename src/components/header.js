@@ -61,13 +61,12 @@ const Header = ({ siteTitle }) => (
               push
             </AniLink>
           </h1>
-            
          
          <ul>   
          <li><AniLink paintDrip duration={1} to="/">Home</AniLink></li>
-         <li><AniLink paintDrip duration={1} to="/about">About</AniLink></li>
-         <li className="c-button"><AniLink paintDrip duration={1} to="/contact">Lets chat</AniLink></li>
-          <li id="hamburger"></li>
+         <li><AniLink paintDrip duration={1} to="/about">About Us</AniLink></li>
+         <li><AniLink paintDrip duration={1} to="/contact">Contact</AniLink></li>
+         <li id="hamburger"></li>
         </ul> 
 
 
