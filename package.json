@@ -49,7 +49,7 @@
     "react-three-fiber": "^5.1.4",
     "rebass": "^3.1.1",
     "styled-components": "^5.2.0",
-    "three": "^0.113.2",
+    "three": "^0.137.0",
     "use-scroll-position": "^0.0.4"
   },
   "devDependencies": {
